@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Vote</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); height: 100%;">
+    <nav class="navbar navbar-default" style="background-color: transparent;border-color: transparent;">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+                <a class="navbar-brand" href="firstPage.html" style="color: white;">Dvoter</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="voteList.html" style="color: white;">投票列表</a></li>
+                    <li><a href="newVote.html" style="color: wheat;">新投票</a></li>
+                    <li><a href="linkVote.html" style="color: white;">投票链接</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <h1 style="color: white;padding-left: 10%;padding-top: 1%;padding-bottom: 1%;">创建你的新投票</h1>
+    <div class="panel panel-default" style="width: 80%;margin:0 auto;border-radius: 10px;border-width: 0px;padding: 40px;margin-bottom: 60px;">
+        <div class="panel-body">
+            <form method="post" action="">
+                <h2 style="padding-bottom: 10px;">添加你的投票选项</h2>
+                <input class="form-control input-lg" type="text" style="margin-bottom: 10px; border-width: 0ch;outline: none;" placeholder="请为您的投票活动取名" id="name">
+                <br />
+                <div id="InputsWrapper">
+                    <input class="form-control input-lg" type="text" style="margin-bottom: 10px;" placeholder="候选项 1" id="news_1">
+                    <input class="form-control input-lg" type="text" style="margin-bottom: 10px;" placeholder="候选项 2" id="news_2">
+                    <input class="form-control input-lg" type="text" style="margin-bottom: 10px;" placeholder="候选项 3" id="news_3">
+                </div>
+                <button type="button" id="AddMoreTextBox" class="btn btn-default btn-lg btn-block" style="text-align: start;margin-bottom: 40px;color: gray;">+ 添加新的候选人</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="submitcd()">下一步</button>
+                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content" style="text-align: center;padding: 20px;">
+                            请输入至少两个的候选项
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        $(function() {
+            App.initAddBallot();
+        });
+
+        var InputCount = 3;
+        $(document).ready(function() {
+            $("#AddMoreTextBox").click(function(e) {
+                InputCount++;
+                $("#InputsWrapper").append(
+                    '<input class="form-control input-lg" type="text" style="margin-bottom: 10px;" placeholder="候选项 ' +
+                    InputCount + '" id="news_' + InputCount + '" >');
+            });
+        });
+
+        function submitcd() {
+            var ballotName = document.getElementById("name").value;
+            var cdArray = new Array(InputCount);
+            for (var i = 0; i < cdArray.length; i++) {
+                cdArray[i] = document.getElementById("news_" + (i + 1)).value;
+            }
+            var cdArrayR = cdArray.filter(function(proposal) {
+                return proposal != "";
+            });
+            if (ballotName == "") {
+                document.getElementById("name").style.borderWidth = "1px";
+                document.getElementById("name").style.borderColor = "red";
+            } else if (cdArrayR.length <= 1) {
+                document.getElementById("name").style.borderWidth = "0px";
+                document.getElementById("name").style.borderColor = "none";
+                $('.bs-example-modal-lg').modal('show');
+            } else {
+                try {
+                    return App.addBallotSubmit(ballotName, cdArrayR);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

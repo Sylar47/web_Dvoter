@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html style="height: 100%;width: 100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="height: 100%;width: 100%;">
+    <div class="jumbotron" style="padding-left: 10%;padding-bottom: 10%;padding-right: 10%; height: 100%;width: 100%;">
+        <div class="container">
+            <h1>Hello, Voters!</h1>
+            <h1 style="padding-top: 15px;">用户需知</h1>
+            <p style="padding-top: 15px;">
+                本系统是基于以太坊的投票系统，请使用谷歌浏览器，并通过Chrome商店或其他方式下载安装Metamask插件，注册后请将网络调整为Rinkeby测试网络(networkId:4)，用于投票消耗的以太币可于<a href="https://www.rinkeby.io/#faucet" target="_blank">https://www.rinkeby.io/#faucet</a>领取（注：此处需要翻墙软件），请保持登录状态操作，操作过程中确认交易后需要一定时间来完成挖矿，请耐心等待。</p>
+            <p>注：本系统使用的主要底层技术版本号如下，详情请查看项目文件package.json<br>1)web3js@0.20.0<br>2)truffle-contract@3.0.4<br>3)truffle-hdwallet-provider@1.0.17<br>4)dotenv@8.2.0<br>5)solc@0.5.16</p>
+            <p>感谢使用！</p>
+            <p style="padding-top: 20px;"><a class="btn btn-primary btn-lg" href="firstPage.html" role="button">本人已阅读并知晓</a></p>
+        </div>
+    </div>
+    <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        $(function() {
+            App.initHelloWorld();
+        })
+    </script>
+</body>
+
+</html>

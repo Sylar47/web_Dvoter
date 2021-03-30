@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html style="height: 100%;width: 100%;">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vote Info</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background-image: linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);height: 95%;width: 100%;">
+    <div style="padding: auto;">
+        <h1 style="color: white;padding-left: 10%;padding-top: 5%;padding-bottom: 30px;">投票详情</h1>
+        <div class="panel panel-default" style="width: 90%;margin:0 auto;border-radius: 10px;border-width: 0px;padding: 40px;margin-bottom: 60px;">
+            <div class="panel-body" style="padding: 40px;">
+                <div class="row">
+                    <div class="col-md-6" id="vote_info"></div>
+                    <div class="col-md-6">
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/Chart.js"></script>
+    <script>
+        $(function() {
+            App.initInfo();
+        });
+    </script>
+</body>
+
+</html>
